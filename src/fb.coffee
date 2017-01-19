@@ -141,6 +141,7 @@ class FBMessenger extends Adapter
         if event.message.text?
             text = if @autoHear then @_autoHear event.message.text, envelope.room else event.message.text
             msg = new TextMessage envelope.user, text, event.message.mid
+            @robot.emit "fb_quickReply", envelope
             @receive msg
             @robot.logger.info "Reply message to room/message: " + envelope.user.name + "/" + event.message.mid
 
